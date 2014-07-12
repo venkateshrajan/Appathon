@@ -27,13 +27,6 @@ namespace ControllerServer
             systemDetails = new SystemDetails();
             InitializeComponent();
             systemDetails.InitializeDriveDetails();
-
-            String[] allfiles = System.IO.Directory.GetDirectories("E:/", "*", System.IO.SearchOption.TopDirectoryOnly);
-           
-            foreach (String file in allfiles)
-            {
-                MessageBox.Show(file);
-            }
         }
 
         private void button1_Click(object sender, System.EventArgs e)

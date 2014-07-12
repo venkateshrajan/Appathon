@@ -68,7 +68,7 @@ namespace ControllerServer
                 if (string.IsNullOrEmpty(temp))
                     continue;
 
-             //   Console.WriteLine("Receiver : " + temp);
+                Console.WriteLine("Receiver : " + temp);
                 string[] messages = temp.Split('#');
 
                 foreach (string request in messages)

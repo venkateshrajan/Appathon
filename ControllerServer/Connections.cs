@@ -153,7 +153,7 @@ namespace ControllerServer
                         Receiver.IsValueChanged = false;
                         // create a file browser object and start.
                         Form1.SystemDetails.sendSystemDetails(ref _mySocket);
-                        new FileExplorer().Start();
+                        new FolderOrFileDetails().Start();
                     }
                     else if (requestString.Equals(MOUSE_CONTROL))
                     {

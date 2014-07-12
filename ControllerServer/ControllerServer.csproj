@@ -53,7 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connections.cs" />
-    <Compile Include="FileExplorer.cs" />
     <Compile Include="FolderOrFileDetails.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
