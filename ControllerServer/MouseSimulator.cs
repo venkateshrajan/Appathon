@@ -44,60 +44,10 @@ namespace ControllerServer
 
         private const string END_SIMULATION = "END_SIMULATION";
 
-        private int _mobWidth;
-        public int MobWidth
-        {
-            get
-            {
-                return _mobWidth;
-            }
-            private set
-            {
-                if (value != _mobWidth)
-                {
-                    _mobWidth = value;
-                }
-            }
-        }
-
-        private int _mobHeight;
-        public int MobHeight
-        {
-            get
-            {
-                return _mobHeight;
-            }
-            private set
-            {
-                if (value != _mobHeight)
-                {
-                    _mobHeight = value;
-                }
-            }
-        }
-
-        public MouseSimulator()
-        {
-            string strResolution = Receiver.Message;
-
-
-            if (strResolution.Contains("$"))
-            {
-                string[] widthandheight = strResolution.Split('$');
-
-                _mobWidth = Convert.ToInt16(widthandheight[0]);
-                _mobHeight = Convert.ToInt16(widthandheight[1]);
-                MessageBox.Show("MouseSimulator : " + _mobWidth);
-                Receiver.IsValueChanged = false;
-            }
-            
-        }
-
         public void StartSimulation()
         {
             string message;
-            bool end = false;
-            while (!end)
+            while (true)
             {
                 message = Receiver.Message;
                // Console.WriteLine("MouseSimulator : " + message);
@@ -125,7 +75,6 @@ namespace ControllerServer
 
                 if (String.IsNullOrEmpty(mouseSignal.Action))
                 {
-                    MessageBox.Show("Dont know Why!!!");
                     Receiver.IsValueChanged = false;
                     continue;
                 }
@@ -161,22 +110,22 @@ namespace ControllerServer
                     double y = mouseSignal.YCoordinate;
                     Console.WriteLine(mouseSignal.XCoordinate + " " + " " + mouseSignal.YCoordinate + " " + mouseSignal.Action);
 
-                    if (SystemDetails.DeskWidth > _mobWidth)
+                    if (SystemDetails.DeskWidth > Connections.MobWidth)
                     {
-                        x *= (SystemDetails.DeskWidth / _mobWidth);
+                        x *= (SystemDetails.DeskWidth / Connections.MobWidth);
                     }
                     else
                     {
-                        x *= (_mobWidth / SystemDetails.DeskWidth);
+                        x *= (Connections.MobWidth / SystemDetails.DeskWidth);
                     }
 
-                    if (SystemDetails.DeskHeight > _mobHeight)
+                    if (SystemDetails.DeskHeight > Connections.MobHeight)
                     {
-                        y *= (SystemDetails.DeskHeight / _mobHeight);
+                        y *= (SystemDetails.DeskHeight / Connections.MobHeight);
                     }
                     else
                     {
-                        y *= (_mobHeight / SystemDetails.DeskHeight);
+                        y *= (Connections.MobHeight / SystemDetails.DeskHeight);
                     }
                     for (int i = 1; i < 3; ++i)
                     {
@@ -186,8 +135,9 @@ namespace ControllerServer
                     //lineDDA((int)Cursor.Position.X, (int)Cursor.Position.Y, (int)x, (int)y);
                 } // end of drag.
                 else if(mouseSignal.Action.Equals(MouseSignal.END_SIMULATION)) {
-                    MessageBox.Show("End");
-                    end = true;
+                    Receiver.IsValueChanged = false;
+                    
+                    return;
                 }
             }// end of while(true).
         }// end of start simulation.

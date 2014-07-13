@@ -166,9 +166,9 @@ namespace ControllerServer
                     _driveTotalSize[i] = Math.Round((Decimal)(drives[i].TotalSize / (1024.0 * 1024 * 1024)), 2, MidpointRounding.AwayFromZero).ToString();
                     _driveSizeUsed[i] = Math.Round(((drives[i].TotalSize - drives[i].TotalFreeSpace) / (1024.0 * 1024 * 1024)), 2, MidpointRounding.AwayFromZero).ToString();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    Console.WriteLine("Mudinjathu");
+                    Console.WriteLine("SystemDetails : " + e.ToString());
                 }
 
             }

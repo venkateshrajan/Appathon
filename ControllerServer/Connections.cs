@@ -13,6 +13,7 @@ namespace ControllerServer
     public class Connections
     {
         private static Socket _mySocket;
+        
         public static Socket MySocket
         {
             get
@@ -25,6 +26,34 @@ namespace ControllerServer
                 {
                     _mySocket = value;
                 }
+            }
+        }
+
+        private static int _mobWidth;
+        public static int MobWidth
+        {
+            get
+            {
+                return _mobWidth;
+            }
+            set
+            {
+                if (value != _mobWidth)
+                    _mobWidth = value;
+            }
+        }
+
+        private static int _mobHeight;
+        public static int MobHeight
+        {
+            get
+            {
+                return _mobHeight;
+            }
+            set
+            {
+                if (value != _mobHeight)
+                    _mobHeight = value;
             }
         }
 
@@ -122,10 +151,33 @@ namespace ControllerServer
                     {
                         _mySocket = _listener.AcceptSocket();
 
+                        _mySocket.Send(Encoding.UTF8.GetBytes("connected"));
+
                         Thread startreceiver = new Thread(() => Receiver.StartReceiver(_mySocket));
                         startreceiver.Start();
                         Console.WriteLine(startreceiver.ManagedThreadId + " Thread Started(StartReceiver)");
 
+                        string resolution = String.Empty;
+                        
+                        while (true)
+                        {
+                            if (!Receiver.IsValueChanged)
+                                continue;
+                            resolution = Receiver.Message;
+                            
+                            if (resolution.Contains('$'))
+                            {
+                                
+                                Receiver.IsValueChanged = false;
+                                string[] widthandheight = resolution.Split('$');
+
+                                _mobWidth = Convert.ToInt16(widthandheight[0]);
+                                _mobHeight = Convert.ToInt16(widthandheight[1]);
+                                break;
+                            }
+                        }
+
+                        MessageBox.Show(_mobHeight.ToString());
                         Thread serverequest = new Thread(new ThreadStart(ServeRequest));
                         serverequest.Start();
                         Console.WriteLine(serverequest.ManagedThreadId + " Thread Started(ServeRequest)");
@@ -151,13 +203,11 @@ namespace ControllerServer
                     if (requestString.Equals(FILE_BROWSER))
                     {
                         Receiver.IsValueChanged = false;
-                        // create a file browser object and start.
                         Form1.SystemDetails.sendSystemDetails(ref _mySocket);
                         new FolderOrFileDetails().Start();
                     }
                     else if (requestString.Equals(MOUSE_CONTROL))
                     {
-                        MessageBox.Show(requestString);
                         Receiver.IsValueChanged = false;
                         new MouseSimulator().StartSimulation();
                     }

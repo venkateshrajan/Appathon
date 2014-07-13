@@ -65,7 +65,9 @@ namespace ControllerServer
                 }
 
                 string temp = System.Text.Encoding.UTF8.GetString(bytes);
-                if (string.IsNullOrEmpty(temp))
+                if (String.IsNullOrEmpty(temp))
+                    continue;
+                if (temp.Equals(String.Empty))
                     continue;
 
                 Console.WriteLine("Receiver : " + temp);

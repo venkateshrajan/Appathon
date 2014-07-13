@@ -13,7 +13,7 @@ namespace ControllerServer
         public const string TAP = "TAP";
         public const string DOUBLE_TAP = "DOUBLE_TAP";
         public const string HOLD = "HOLD";
-        public const string END_SIMULATION = "END_SIMULATION";
+        public const string END_SIMULATION = "END";
 
         private double _xCoordinate;
         public double XCoordinate
@@ -62,26 +62,5 @@ namespace ControllerServer
                 }
             }
         }
-
-        /*public MouseSignal(double x, double y, string action)
-        {
-            _xCordinate = x;
-            _yCordinate = y;
-            _action = action;
-        }
-
-        public MouseSignal(string action)
-        {
-            _xCordinate = 20;
-            _yCordinate = 20;
-            _action = action;
-        }
-
-        public MouseSignal()
-        {
-            _xCordinate = 10;
-            _yCordinate = 10;
-            _action = "";
-        }*/
     }
 }

@@ -5,11 +5,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ControllerServer
 {
     class FolderOrFileDetails
     {
+        private const string END_EXPLORER = "END";
       
         private String[] _folderOrFilename;
         public String[] FolderOrFilename
@@ -45,22 +47,22 @@ namespace ControllerServer
             }
         }
 
-        private String[] _folderorFilePath;
+        /*private String[] _folderOrFilePath;
         public String[] FolderOrFilePath
         {
             get
             {
-                return _folderorFilePath;
+                return _folderOrFilePath;
             }
 
             set
             {
-                if (value != _folderorFilePath)
+                if (value != _folderOrFilePath)
                 {
-                    _folderorFilePath = value;
+                    _folderOrFilePath = value;
                 }
             }
-        }
+        }*/
 
         private bool[] _isFolder;
         public bool[] IsFolder
@@ -89,11 +91,15 @@ namespace ControllerServer
 
                 if (String.IsNullOrEmpty(message) || !Receiver.IsValueChanged || String.IsNullOrWhiteSpace(message))
                     continue;
+                if (message.Equals(END_EXPLORER))
+                {
+                    Receiver.IsValueChanged = false;
+                    return;
+                }
                 if (!(message.Contains(":") && message.Contains("\\")))
                     continue;
 
-                if (message.Equals("End"))
-                    break;
+                
                 else if (message.Contains(":") && message.Contains("\\"))
                 {
                     message.Replace('\\', '/');
@@ -102,26 +108,26 @@ namespace ControllerServer
                     String[] allfiles = System.IO.Directory.GetFiles(message, "*", System.IO.SearchOption.TopDirectoryOnly);
 
                     _folderOrFilename = new String[allfiles.Length + allfolders.Length];
-                    _folderorFilePath = new String[allfiles.Length + allfolders.Length];
+                    //_folderOrFilePath = new String[allfiles.Length + allfolders.Length];
                     _fileExtension = new String[allfiles.Length + allfolders.Length];
                     _isFolder = new bool[allfiles.Length + allfolders.Length];
-                    
+
                     int i = 0;
                     foreach (String folder in allfolders)
                     {
                         _folderOrFilename[i] = Path.GetFileName(folder);
                         _fileExtension[i] = "";
                         _isFolder[i] = true;
-                        _folderorFilePath[i] = folder;
+                        //_folderOrFilePath[i] = folder;
                         i++;
                     }
-                    
+
                     foreach (String file in allfiles)
                     {
                         _folderOrFilename[i] = Path.GetFileNameWithoutExtension(file);
                         _fileExtension[i] = Path.GetExtension(file);
                         _isFolder[i] = false;
-                        _folderorFilePath[i] = file;
+                        //_folderOrFilePath[i] = file;
                         i++;
                     }
                     try

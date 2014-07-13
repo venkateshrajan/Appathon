@@ -25,9 +25,9 @@ C:\Users\Venky\documents\visual studio 2013\Projects\ControllerServer\Controller
 C:\Users\Venky\documents\visual studio 2013\Projects\ControllerServer\ControllerServer\bin\Debug\Microsoft.Xna.Framework.dll
 C:\Users\Venky\documents\visual studio 2013\Projects\ControllerServer\ControllerServer\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Venky\documents\visual studio 2013\Projects\ControllerServer\ControllerServer\bin\Debug\Microsoft.Xna.Framework.xml
+C:\Users\Venky\documents\visual studio 2013\Projects\ControllerServer\ControllerServer\obj\Debug\ControllerServer.csprojResolveAssemblyReference.cache
 C:\Users\Venky\documents\visual studio 2013\Projects\ControllerServer\ControllerServer\obj\Debug\ControllerServer.Form1.resources
 C:\Users\Venky\documents\visual studio 2013\Projects\ControllerServer\ControllerServer\obj\Debug\ControllerServer.Properties.Resources.resources
 C:\Users\Venky\documents\visual studio 2013\Projects\ControllerServer\ControllerServer\obj\Debug\ControllerServer.csproj.GenerateResource.Cache
 C:\Users\Venky\documents\visual studio 2013\Projects\ControllerServer\ControllerServer\obj\Debug\ControllerServer.exe
 C:\Users\Venky\documents\visual studio 2013\Projects\ControllerServer\ControllerServer\obj\Debug\ControllerServer.pdb
-C:\Users\Venky\documents\visual studio 2013\Projects\ControllerServer\ControllerServer\obj\Debug\ControllerServer.csprojResolveAssemblyReference.cache
